@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import firebase from 'firebase';
 import appStore from '../store/appstore';
 import { observer } from 'mobx-react';
-import M from 'materialize-css/dist/js/materialize.min.js';
+import M from 'materialize-css/dist/js/materialize.min';
 import * as remoteActions from '../scripts/remoteActions';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 const styles={

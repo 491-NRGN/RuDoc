@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Home from './pages/Home.js';
-import createGroup from './pages/createGroup.js';
-import existingGroups from './pages/existingGroups.js';
-import MsgPage from './pages/MsgPage.js';
-import AddPar from './pages/AddPar.js';
-import UserAdd from './pages/UserAdd.js'
+import Home from './pages/Home';
+import createGroup from './pages/createGroup';
+import existingGroups from './pages/existingGroups';
+import MsgPage from './pages/MsgPage';
+import AddPar from './pages/AddPar';
+import UserAdd from './pages/UserAdd'
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css';

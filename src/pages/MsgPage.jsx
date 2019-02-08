@@ -1,10 +1,10 @@
 import React, {Component, Fragment} from 'react';
-import appStore from '../store/appstore.js';
+import appStore from '../store/appstore';
 import { Link } from 'react-router-dom';
-import * as remoteActions from '../scripts/remoteActions.js';
+import * as remoteActions from '../scripts/remoteActions';
 import { observer } from 'mobx-react';
 import Header1 from '../components/Header1';
-import fire from '../scripts/fire.js';
+import fire from '../scripts/fire';
 import firebase from 'firebase';
 var db =fire.firestore();
 var count=0;

@@ -1,11 +1,11 @@
 import React, {Component, Fragment} from 'react';
-import * as remoteActions from '../scripts/remoteActions.js';
-import Header1 from '../components/Header1.js';
+import * as remoteActions from '../scripts/remoteActions';
+import Header1 from '../components/Header1';
 import { Link } from 'react-router-dom';
-import appStore from '../store/appstore.js';
+import appStore from '../store/appstore';
 import { observer } from 'mobx-react';
-import M from 'materialize-css/dist/js/materialize.min.js';
-import fire from '../scripts/fire.js';
+import M from 'materialize-css/dist/js/materialize.min';
+import fire from '../scripts/fire';
 import randomstring from 'randomstring';
 var db =fire.firestore();
 class createGroup extends Component {

@@ -17,9 +17,9 @@ class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route exact path='/createGroup' component={createGroup}/>
           <Route exact path='/existingGroups' component={existingGroups}/>
-          <Route exact path='/MsgPage/:groupId' component={MsgPage}/>
-          <Route exact path='/MsgPage/:groupId/AddPar' component={AddPar}/>
-          <Route exact path='/MsgPage/:groupId/AddPar/UserAdd/:uid' component={UserAdd}/>
+          <Route exact path='/MsgPage' component={MsgPage}/>
+          <Route exact path='/MsgPage/:cid' component={UserAdd}/>
+          
         </div>
       </Router>
       </div>

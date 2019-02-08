@@ -95,7 +95,7 @@ var gid=this.props.match.params.groupId;
                             this.state.Suarr.map((m, i)=>{
                               for(var x in m){
                                 var y= m[x]
-                                console.log(x)
+                                console.log({y})
                               }
 
                               return(

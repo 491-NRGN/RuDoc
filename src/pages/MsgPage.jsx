@@ -3,206 +3,166 @@ import appStore from '../store/appstore';
 import { Link } from 'react-router-dom';
 import * as remoteActions from '../scripts/remoteActions';
 import { observer } from 'mobx-react';
-import Header1 from '../components/Header1';
+import Header from '../components/Header';
 import fire from '../scripts/fire';
 import firebase from 'firebase';
 var db =fire.firestore();
-var count=0;
-var t=Math.floor(Math.random() * 10000);
+
+
 class MsgPage extends Component{
   constructor(props){
     super(props)
     this.state={
-      groupId:null,
-      groupName: null,
-      messages:[],
-      newMessage:''
+      message:[],
+      campID: null,
+      campInfo: null,
+      campBudget:0,
+      campDate:null,
+      location: null
+
+
     }
   }
 
-  grouping(){
-    var groupId= this.props.match.params.groupId;
-    console.log(groupId);
-
-    //IDHAR MID KA PRAYOG HUA
-    db.collection("groups").where("gid", "==", groupId)
-    .get()
-    .then((querySnapshot)=> {
-        querySnapshot.forEach((doc)=> {
-            // doc.data() is never undefined for query doc snapshots
-            this.setState({
-              groupId: doc.data().gid,
-              groupName: doc.data().name,
-              type:""
-            })
-        });
-    })
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
-  }
+//   grouping(){
+//     var groupId= this.props.match.params.groupId;
+//     console.log(groupId);
+//
+//     //IDHAR MID KA PRAYOG HUA
+//     db.collection("groups").where("gid", "==", groupId)
+//     .get()
+//     .then((querySnapshot)=> {
+//         querySnapshot.forEach((doc)=> {
+//             // doc.data() is never undefined for query doc snapshots
+//             this.setState({
+//               groupId: doc.data().gid,
+//               groupName: doc.data().name,
+//               type:""
+//             })
+//         });
+//     })
+//     .catch(function(error) {
+//         console.log("Error getting documents: ", error);
+//     });
+//   }
   componentDidUpdate() {
     console.log("Component Did Update!");
-  }
+    }
 
-  componentDidMount(){
-    remoteActions.setListenerOnAuthChange();
-  }
+   componentDidMount(){
+     remoteActions.setListenerOnAuthChange();
 
-handleClick(){
-  console.log("hooo")
-  var gid= this.props.match.params.groupId;
-  var mid= firebase.firestore.FieldValue.serverTimestamp();
-  if(this.state.newMessage ==="" && count===0)
-  {
-    alert
-    ("You are too lazy to even write a message. What an asshole!!")
-  }
-else
-  {var msgDict={
-    body : this.state.newMessage,
-    mid,
-    gid,
-    uid: appStore.currentUser.uid
-  }
+       this.handleClick()
 
-//THE adding message GROUP SHIT
-if(count===0)
-{
+   }
+//
+ handleClick(){
 
-  db.collection("messages").add({
-  body: msgDict.body,
-  mid: msgDict.mid,
-  gid: msgDict.gid,
-  uid: msgDict.uid
-})
-.then(function(docRef) {
-    console.log("messages written with ID: ", docRef.id);
-})
-.catch(function(error) {
-    console.error("Error adding messages ", error);
-});
-}
 
 //THE retrieving message GROUP SHIT
-  db.collection("messages").where("gid", "==", gid).orderBy("mid")
+  db.collection("campaign").where("status", "==", true)
   .get()
   .then((querySnapshot)=> {
-      var arr = []
-
+      var arrId = []
+      var arrName=[]
+      var finalArr=[]
+      var lamba=0
       querySnapshot.forEach((doc)=> {
           // doc.data() is never undefined for query doc snapshots
-          var msggD= doc.data()
-          arr.push(msggD)
+          var campId= doc.data().cid
+          var campName= doc.data().name
+          var info= doc.data().info
+          var bud=doc.data().budget
+          var location= doc.data().location
+          var date= doc.data().date
+          var campInfo= "Project: "+campName+ "\n" +"Information: "+ info+"\n"+"Location: "+location+"\n"+"Budget: "+bud+ "\n" + "Date: "+ date;
+          console.log(campInfo)
+          arrId.push(campId) //id
+          arrName.push(campInfo) //name
       });
 
+      var result =  arrName.reduce((result, field, index)=> {
+        lamba=lamba+1;
+        result[arrId[index]] = field;
+        var key=arrId[index]
+        var value= field
+        var dict={
+          [arrId[index]]: value
+        }
+        console.log(key)
+          finalArr.push(dict)
+          // finalArr.push({result})
+
+
+        return result;
+      }, {})
       this.setState({
-        messages: arr,
-        newMessage: ""
+        message: finalArr
       });
 
-      console.log(this.state.messages)
+      console.log(this.state.message)
   })
   .catch(function(error) {
       console.log("Error getting documents: ", error);
   });
-
-  ///TESTINGGGGGGGGG
-
-  // db.collection("users").where("uid", "==", this.msgDict.uid)
-  // .get()
-  // .then((querySnapshot)=> {
-  //
-  //
-  //     querySnapshot.forEach((doc)=> {
-  //         // doc.data() is never undefined for query doc snapshots
-  //         var msggD= doc.data()
-  //         arr.push(msggD)
-  //     });
-  //
-  //     this.setState({
-  //       messages: arr,
-  //       newMessage: ""
-  //     });
-  //
-  //     console.log(this.state.messages)
-  // })
-  // .catch(function(error) {
-  //     console.log("Error getting documents: ", error);
-  // });
-  //
-  //
-
-
-
-
-
-count=0;}
-
 }
 
 render(){
-var gid=this.props.match.params.groupId;
+
   return(
       <Fragment>
         {
             appStore.auth.isLoggedIn ?
             (
               <Fragment>
-              {
-                this.state.groupId? null : this.grouping()
-              }
-                <Header1/>
-                <div class="col s12 white"><h1>{this.state.groupName}</h1></div>
 
+                <Header/>
 
-                <div class="row">
-                  <form class="col s12">
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input value={this.state.newMessage} id="email"  class="active" onChange={(e)=>{
-                          this.setState({
-                                newMessage:e.target.value
-                              })
-                        }}/>
-
-                        <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Write a message</font></span>
-                      </div>
-                    </div>
-                  </form>
                   <ul>
 
-                  <li><Link to={'/MsgPage/'+ gid+ "/AddPar"} ><button class="btn waves-effect waves-light center-align" name="action">Click to add users</button></Link></li>
-                  &nbsp;
+                  <h1> List of active Fundraising campaigns</h1>
 
-                  <li><button class="btn waves-effect waves-light center-align" name="action" onClick={()=>{
-                    count=1;
-                    this.handleClick();
-                    this.state.messages.map((m, i)=>{
-                    return(
-                      <div class="white"><pre key={i}><b>{m.body}</b> by<font color="green"> Random Guy </font></pre></div>
+                  {
+
+                    this.state.message.map((m, i)=>{
+                      console.log("hello121")
+                      for(var x in m){
+                        var y= m[x]
+                        console.log(x)
+                      }
+
+                      return(
+
+                      <li>
+                      <div>
+                      <pre key={i}>
+                      <div class="row">
+                        <div class="col s12 m6">
+                          <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+
+                              <p><b>{y}</b></p>
+                            </div>
+                            <div class="card-action">
+                              <Link to={"/MsgPage/"+x}>Donate Us!</Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </pre></div></li>
                     )
-
-                  })
-                }}> Check previous messages<i class="material-icons right">send</i></button></li>&nbsp;
-
+                    })
+              }
 
 
 
-                  <li><button class="btn waves-effect waves-light center-align" type="submit" name="action" onClick={()=>{this.handleClick()}}>Submit
-                  <i class="material-icons right">send</i>
-                </button></li>
-                {
-                  this.state.messages.map((m, i)=>{
-                    return(
-                      <div class="white"><pre key={i}><b>{m.body}</b> by<font color="green"> Random guy {Math.floor(Math.random() * 10000)}    </font></pre></div>
-                    )
-                  })
-                }
+
+
+
                 </ul>
-                </div>
+
               </Fragment>
-              
+
             )
              :
             (

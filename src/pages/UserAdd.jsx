@@ -3,7 +3,7 @@ import appStore from '../store/appstore';
 import { Link } from 'react-router-dom';
 import * as remoteActions from '../scripts/remoteActions';
 import { observer } from 'mobx-react';
-import Header1 from '../components/Header1';
+import Header from '../components/Header';
 import fire from '../scripts/fire';
 import firebase from 'firebase';
 var db =fire.firestore();
@@ -14,83 +14,56 @@ class UserAdd extends Component{
     super(props)
     this.state=({
       //add shit
-      uid:null,
+      budget:0,
       name:null,
-      groupId:null,
-      groupName:null
+      cid:null,
+      fund:0,
+      fundx:0
     })
   }
+handleClick(){
 
+    var fund1=this.state.fundx;
+    var fundy=this.state.fund + fund1
+    this.setState({
+      fund: fundy,
+      fundx:0
+    })
+
+    alert ("You donated"+fund1 +"Thank YOU!")
+
+
+
+}
   grouping(){
-    var uid= this.props.match.params.uid;
-    var groupId= this.props.match.params.groupId;
-    console.log(groupId);
+    var cid= this.props.match.params.cid;
 
 
-    db.collection("users").where("uid", "==", uid)
+
+
+    db.collection("campaign").where("cid", "==", cid)
     .get()
     .then((querySnapshot)=> {
         querySnapshot.forEach((doc)=> {
             // doc.data() is never undefined for query doc snapshots
             this.setState({
-              uid: doc.data().uid,
+              budget: doc.data().budget,
               name: doc.data().name,
+              fund: doc.data().fund
+
 
             })
         });
     })
+
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
   }
-kootah(){
-  var groupId= this.props.match.params.groupId;
-  console.log(groupId);
-  var userDict={
-    [this.state.uid]:this.state.name
-  }
 
-  var groupDict={}
-
-  db.collection("groups").where("gid", "==", groupId)
-  .get()
-  .then((querySnapshot)=> {
-      querySnapshot.forEach((doc)=> {
-          // doc.data() is never undefined for query doc snapshots
-          var docId= doc.id;
-          this.setState({
-            groupId: groupId,
-            groupName: doc.data().name
-          })
-          groupDict={
-            [this.state.groupId]:this.state.groupName
-          }
-          db.collection("groups").doc(docId).set({
-            users: userDict
-          },{merge:true})
-          console.log("success")
-          })
-      });
-
-      db.collection("users").where("uid", "==",this.state.uid)
-      .get()
-      .then((querySnapshot)=> {
-          querySnapshot.forEach((doc)=> {
-              // doc.data() is never undefined for query doc snapshots
-              var docId= doc.id;
-
-              db.collection("users").doc(docId).set({
-                groups: groupDict
-              },{merge:true})
-              console.log("success")
-              })
-          });
-
-
-
-}
   componentDidMount(){
-         remoteActions.setListenerOnAuthChange()
+         remoteActions.setListenerOnAuthChange();
+         this.grouping();
     }
 
 render(){
@@ -103,14 +76,33 @@ render(){
           (
 
                   <Fragment>
-                      {
-                        this.state.uid? null : this.grouping()
 
-                      }
-                      <Header1/>
-                      <div class="col s12 white"><h5>Really???? This guy? Your choice SENPAI!</h5></div>
-                      &nbsp;
-                      <button class="btn waves-effect waves-light center-align" type="submit" name="action" onClick={()=>{this.kootah()}}> add {this.state.name} </button>
+                      <Header/>
+                      <h1>Project: {this.state.name}</h1>
+                      <h6>Collection Aim: {this.state.budget}</h6>
+                      <h6>Collected Amount: {this.state.fund}</h6>
+                      <br/><br/>
+                      <div class="row">
+                            <form class="col s12">
+                              <div class="row">
+                                <div class="input-field col s12">
+                                  <input value={this.state.fundx} id="email"  class="active" onChange={(e)=>{
+                                    this.setState({
+                                      fundx: e.target.value
+                                    })
+                                  }}/>
+                                  <label class="active"><font color="green">Please donate generously</font></label>
+                                  <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Donation-amount</font></span>
+                                </div>
+                              </div>
+                            </form>
+                            <button class="btn waves-effect waves-light center-align" type="submit" name="action" onClick={()=>{this.handleClick()}}>Donate!
+                            <i class="material-icons right">send</i>
+
+                          </button>
+
+                          </div>
+
                   </Fragment>
 
 

@@ -7,15 +7,15 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fire from '../scripts/fire.js';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import logo from './logouse.png';
-import gareeb1 from './gareeb1.jpg';
-import gareeb2 from './gareeb2.png';
-import gareeb3 from './gareeb3.jpeg';
-import gareeb4 from './gareeb4.jpg';
-import gareeb5 from './gareeb5.jpg';
-import gareeb6 from './gareeb6.jpg';
-import gareeb7 from './photo7.jpg';
-import gareeb8 from './gareeb8.jpg';
+import logo from '../Images/logouse.png';
+import gareeb1 from '../Images/gareeb1.jpg';
+import gareeb2 from '../Images/gareeb2.png';
+import gareeb3 from '../Images/gareeb3.jpeg';
+import gareeb4 from '../Images/gareeb4.jpg';
+import gareeb5 from '../Images/gareeb5.jpg';
+import gareeb6 from '../Images/gareeb6.jpg';
+import gareeb7 from '../Images/photo7.jpg';
+import gareeb8 from '../Images/gareeb8.jpg';
 
 
 const h2s = {

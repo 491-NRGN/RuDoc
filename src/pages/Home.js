@@ -21,11 +21,19 @@ import gareeb8 from '../Images/gareeb8.jpg';
 const h2s = {
 
   textAlign : 'center',
-  fontFamily : 'Railway',
+  fontWeight : 'bold',
+  fontSize: "40px"
+
+}
+
+const h5s = {
+
+  textAlign : 'center',
   fontWeight : 'bold',
   fontSize: "20px"
 
 }
+
 
 const imgs = {
   maxWidth : '100%',
@@ -105,7 +113,7 @@ dB.collection("users").add({
 
         <h2 className = "center-align" style = {h2s}> Our Vision </h2>
 
-        <h5 style = {h2s} className = "cyan-text darken-2"> "To improve health and foster other human rights with those most in need by accompanying communities, while educating and inspiring others to action." </h5>
+        <h5 style = {h5s} className = "cyan-text darken-2"> "To improve health and foster other human rights with those most in need by accompanying communities, while educating and inspiring others to action." </h5>
 
 
  <br/>
@@ -188,10 +196,11 @@ The most interesting partnerships, from my perspective, pair traditional healthc
 
         <h2 className = "center-align" style = {h2s}> Our Vision </h2>
 
-        <h5 style = {h2s} className = "cyan-text darken-2"> "To improve health and foster other human rights with those most in need by accompanying communities, while educating and inspiring others to action." </h5>
+        <h5 style = {h5s} className = "cyan-text darken-2"> "To improve health and foster other human rights with those most in need by accompanying communities, while educating and inspiring others to action." </h5>
 
+        <a className='white waves-effect waves-light btn'><Link to="/MsgPage"><font color = "black">Donate Now!</font></Link></a>
 
- <br/>
+ <br/> <br/> <br/>
           <div className = "row">
           <div className = "col s12 m6 l6">
          <img src={gareeb7} style = {imgs}/>
@@ -201,11 +210,29 @@ The most interesting partnerships, from my perspective, pair traditional healthc
          </div>
          </div>
 
+         <div className = "row">
+         <div className = "col s12 m4 l4">
+          <i class="large material-icons">add</i>
+          <h4> Qualified specialists </h4>
+          <p> We hire the best specialists to deliver top-notch diagnostic services for you. </p>
+          </div>
+          <div className = "col s12 m4 l4">
+          <i class="large material-icons">mood</i>
+          <h4> Modern equipment </h4>
+          <p> We use the first-class medical equipment for timely diagnostics of various diseases. </p>
+          </div>         
+          <div className = "col s12 m4 l4">
+          <i class="large material-icons">local_hospital</i>
+          <h4> Emergency diagnostic </h4>
+          <p> Our emergency diagnostics services help you get the most accurate diagnosis in a minimal time. </p>
+          </div>
+          </div>
+
 
         <h2 style = {h2s}> Fund Raising </h2>
 
         <p> Though many of us are health professionals, our solutions extend far beyond the medical. We volunteer our time and expertise in communities that invite us to join them. </p>
-        <a className='white btn pulse black-text'><Link to="/MsgPage">Donate Now!</Link></a>
+        <a className='white waves-effect waves-light btn'><Link to="/MsgPage"><font color = "black">Donate Now!</font></Link></a>
         </div>
         <br/>
         <div className = "container">

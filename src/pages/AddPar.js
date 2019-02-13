@@ -8,7 +8,7 @@ import fire from '../scripts/fire.js';
 import firebase from 'firebase';
 var db =fire.firestore();
 
-class AddPar extends Component{
+class AddPar extends Component{          
 
   constructor(props){
     super(props)

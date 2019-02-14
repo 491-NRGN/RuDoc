@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 import * as remoteActions from '../scripts/remoteActions.js';
 import { observer } from 'mobx-react';
 import Header from '../components/Header';
+import gareeb1 from '../Images/gareeb1.jpg';
 import Footer from '../components/Footer';
 import fire from '../scripts/fire.js';
 import firebase from 'firebase';
 var db =fire.firestore();
 
+const imgs = {
+  maxWidth : '100%',
+  height : '260px'
+}
 
 class MsgPage extends Component{
   constructor(props){
@@ -139,9 +144,11 @@ render(){
                       <pre key={i}>
                       <div class="row">
                         <div class="col s12 m6">
-                          <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
-
+                          <div class="card">
+                                    <div class="card-image">
+                                  <img src={gareeb1} alt = "lol" style = {imgs}/>
+                                  </div>
+                               <div class="card-content white-text">
                               <p><b>{y}</b></p>
                             </div>
                             <div class="card-action">
@@ -192,9 +199,11 @@ render(){
                       <pre key={i}>
                       <div class="row">
                         <div class="col s12 m6">
-                          <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
-
+                          <div class="card">
+                                    <div class="card-image">
+                                  <img src={gareeb1} alt = "lol" style = {imgs}/>
+                                  </div>
+                               <div class="card-content black-text">
                               <p><b>{y}</b></p>
                             </div>
                             <div class="card-action">

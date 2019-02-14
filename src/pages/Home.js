@@ -228,7 +228,6 @@ The most interesting partnerships, from my perspective, pair traditional healthc
           </div>
           </div>
 
-
         <h2 style = {h2s}> Fund Raising </h2>
 
         <p> Though many of us are health professionals, our solutions extend far beyond the medical. We volunteer our time and expertise in communities that invite us to join them. </p>

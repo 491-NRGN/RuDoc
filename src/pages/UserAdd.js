@@ -7,6 +7,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fire from '../scripts/fire.js';
 import firebase from 'firebase';
+import TextField from '@material-ui/core/TextField';
+
+
 var db =fire.firestore();
 
 class UserAdd extends Component{
@@ -83,6 +86,19 @@ render(){
                       <h6>Collection Aim: {this.state.budget}</h6>
                       <h6>Collected Amount: {this.state.fund}</h6>
                       <br/><br/>
+                      <TextField
+          id="outlined-helperText"
+          label="Donation Amount"
+          value = {this.state.fundx}
+          onChange = {(e)=>{
+            this.setState({
+              fundx: e.target.value
+            })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
                       <div class="row">
                             <form class="col s12">
                               <div class="row">
@@ -117,6 +133,19 @@ render(){
                 <h6>Collection Aim: {this.state.budget}</h6>
                 <h6>Collected Amount: {this.state.fund}</h6>
                 <br/><br/>
+                <TextField
+          id="outlined-helperText"
+          label="Donation Amount"
+          value = {this.state.fundx}
+          onChange = {(e)=>{
+            this.setState({
+              fundx: e.target.value
+            })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
                 <div class="row">
                       <form class="col s12">
                         <div class="row">

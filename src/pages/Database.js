@@ -8,9 +8,12 @@ import { observer } from 'mobx-react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import fire from '../scripts/fire.js';
 import randomstring from 'randomstring';
+import './createGroup.css'
+import TextField from '@material-ui/core/TextField';
+
 var db =fire.firestore();
 var Diseases1=[
-"Malaria", "Dengue", "Filaria", "Chikungunya", "Japanese Encephalitis", "Kala-Azar", "Tuberculosis", ,"influenza","diabetes","Bloodpressure"]
+"Malaria", "Dengue", "Filaria", "Chikungunya", "Japanese Encephalitis", "Kaala-Azhar", "Tuberculosis", ,"influenza","diabetes"]
 var arr=[]
 
 class Database extends Component {
@@ -100,39 +103,28 @@ componentDidMount(){
 
                   <br/>
                   <br/>
+                  <form noValidate autoComplete="off">
+                  <TextField
+                  id="outlined-helperText"
+                  label="Campaign Region"
+                  value = {this.state.Region}
+                  onChange = {(e)=>{
+                    this.setState({
+                      Region: e.target.value
+                    })
+                  }}
+                  margin="normal"
+                  variant="outlined"
+                />
                   <br/>
-                          <div class="row">
-                            <form class="col s12">
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <input value={this.state.Region} id="email"  class="active" onChange={(e)=>{
-                                    this.setState({
-                                      Region: e.target.value
-                                    })
-                                  }}/>
-
-                                  <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Campaign-Region</font></span>
-                                </div>
-                              </div>
-
-
-
-
-                            </form>
-                            <button class="btn waves-effect waves-light center-align" type="submit" name="action" onClick={()=>{this.handleClick()}}>Check Diseases On rise here!
+                  </form>
+                          
+                            <button class="button button1" type="submit" name="action" onClick={()=>{this.handleClick()}}>Check Diseases On rise here!
                             <i class="material-icons right">send</i>
                           </button>
                           <br/>
                           <br/>
                           <h6>Disease On rise here at given location (past 5 years): <b>{arr[0]}</b></h6>
-
-
-
-
-
-
-
-                          </div>
 
                           <Footer/>
               </Fragment>

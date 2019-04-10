@@ -107,7 +107,7 @@ dB.collection("users").add({
 
 
 
-        <img class="responsive-img" src={logo}/>
+        <img class="img" src={logo}/>
 
         <div className = "container">
 

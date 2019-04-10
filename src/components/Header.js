@@ -45,7 +45,7 @@ cool(){
           </ul>
           <ul id="dropdown2" class="dropdown-content">
             <li><Link to='/existingGroups'>Write Testimony</Link></li>
-            <li><Link to='/Database'>Database</Link></li></ul>
+            <li><Link to='/Database'>Diseases</Link></li></ul>
           <nav>
               <div class="nav-wrapper blue-grey darken-3">
                 <a class="brand-logo cyan-text text-lighten-4"><Link to='/'><font color = "cyan">RuDoc</font></Link></a>
@@ -81,7 +81,7 @@ cool(){
 
           <li><Link to='/'>Verify yourself</Link></li>
           <li><Link to='/existingGroups'>Write Testimony</Link></li>
-          <li><Link to='/Database'>Database</Link></li>
+          <li><Link to='/Database'>Diseases</Link></li>
           <li><Link to='/Blogs'>Blogs</Link></li>
           <li><Link to='/about'>About Us</Link></li>
   </ul>

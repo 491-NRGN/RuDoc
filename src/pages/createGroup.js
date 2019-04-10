@@ -8,6 +8,26 @@ import { observer } from 'mobx-react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import fire from '../scripts/fire.js';
 import randomstring from 'randomstring';
+import TextField from '@material-ui/core/TextField';
+import './createGroup.css'
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  dense: {
+    marginTop: 16,
+  },
+  menu: {
+    width: 200,
+  },
+});
+
 var db =fire.firestore();
 
 class createGroup extends Component {
@@ -123,84 +143,111 @@ componentDidMount(){
 
           appStore.auth.isLoggedIn ?
             (
-              <Fragment>
+              <div>
+                    <div>
               <Header/>
 
 
                   <span class="black-text name"><h1>Fundraising Campaign</h1></span>
 
+                  <br/> 
+                  <div className = "color">
+                  <form noValidate autoComplete="off">
+        <TextField
+          id="outlined-helperText"
+          label="Campaign Name"
+          value = {this.state.campName}
+          onChange = {(e)=>{
+            this.setState({
+              campName : e.target.value
+            })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
+        <TextField
+          id="outlined-helperText"
+          label="Campaign Budget"
+          value = {this.state.budget}
+          onChange = {(e)=>{
+            this.setState({
+              budget: e.target.value
+            })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
+          <TextField
+          id="outlined-helperText"
+          label="Campaign Info"
+          value = {this.state.info}
+          onChange = {(e)=>{
+            this.setState({
+              info: e.target.value
+             })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
+        <TextField
+          id="outlined-multiline-static"
+          label="Campaing Info"
+          multiline
+          rows="4"
+          value = {this.state.info}
+          onChange = {(e)=>{
+            this.setState({
+              info: e.target.value
+             })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
+                <TextField
+          id="outlined-helperText"
+          label="Campaign Location"
+          value = {this.state.location}
+          onChange = {(e)=>{
+            this.setState({
+              location: e.target.value
+            })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
+        <TextField
+          id="outlined-helperText"
+          label="Campaign Date"
+          value = {this.state.date}
+          onChange = {(e)=>{
+            this.setState({
+              date: e.target.value
+            })
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <br/>
+        </form>
+        </div>
                   <br/>
-                  <br/>
-                  <br/>
-                          <div class="row">
-                            <form class="col s12">
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <input value={this.state.campName} id="email"  class="active" onChange={(e)=>{
-                                    this.setState({
-                                      campName: e.target.value
-                                    })
-                                  }}/>
-                                  <label class="active"><font color="green">Be informative</font></label>
-                                  <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Campaign-Name</font></span>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <input value={this.state.budget} id="email"  class="active" onChange={(e)=>{
-                                    this.setState({
-                                      budget: e.target.value
-                                    })
-                                  }}/>
+                  
+                            <button class="button button1" type="submit" name="action" onClick={()=>{this.handleClick()}}>Submit
+                            <i class="material-icons right">send</i>
+                          </button>
 
-                                  <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Campaign-Budget</font></span>
-                                </div>
-
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <input value={this.state.info} id="email"  class="active" onChange={(e)=>{
-                                    this.setState({
-                                      info: e.target.value
-                                    })
-                                  }}/>
-
-                                  <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Campaign-Info</font></span>
-                                </div>
-
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <input value={this.state.location} id="email"  class="active" onChange={(e)=>{
-                                    this.setState({
-                                      location: e.target.value
-                                    })
-                                  }}/>
-
-                                  <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Campaign-Location</font></span>
-                                </div>
-
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <input value={this.state.date} id="email"  class="active" onChange={(e)=>{
-                                    this.setState({
-                                      date: e.target.value
-                                    })
-                                  }}/>
-
-                                  <span class="helper-text " data-error="wrong" data-success="right"><font color="green">Campaign-Dates</font></span>
-                                </div>
-
-                              </div>
-                            </form>
-                            <button class="btn waves-effect waves-light center-align" type="submit" name="action" onClick={()=>{this.handleClick()}}>Submit
+                          <button class="button button1 disabled" type="submit" name="action" onClick={()=>{this.handleClick()}}>Submit
                             <i class="material-icons right">send</i>
                           </button>
                           </div>
 
                           <Footer/>
-              </Fragment>
+              </div>
             )
           :
             (
